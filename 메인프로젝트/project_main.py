@@ -3,7 +3,20 @@ import random
 import game_framework
 import title_state
 
+class Barrier:
+    def __init__(self):
+        self.x,self.y=400,80
+        self.image = load_image('장애물.png')
 
+    def enter(self):
+        self.sizeX,self.sizeY=80,440
+        self.y=600-(self.sizeY/2)
+
+    def draw(self):
+        self.image.draw(self.x,self.y)
+
+    def exit(self):
+        del(self.image)
 
 class Background:
     def __init__(self):
@@ -28,14 +41,14 @@ class Boy:
         self.jump_image=load_image('점프.png')
 
     def update(self):
-        global jump,jump_time,limit
+        global jump,limit
         self.frame=(self.frame+1)%8
         self.jump_frame=(self.jump_frame+1)%4
         limit=150
-        jump_time=0
+
         if(jump==True):
             boy.y+=60
-            jump_time+=1
+
         elif(boy.y>=limit and jump==False):
             boy.y-=60
 
@@ -48,20 +61,22 @@ class Boy:
 
 
 def enter():
-    global boy,grass,background,jump,running,jump_time
+    global boy,grass,background,jump,running,barrier
     open_canvas()
     boy=Boy()
     grass=Grass()
     background=Background()
+    barrier=Barrier()
     running = True
     jump = False
 
 
 def exit():
-    global boy,grass,background
+    global boy,grass,background,barrier
     del(boy)
     del(grass)
     del(background)
+    del(barrier)
     close_canvas()
 
 def handle_events():
@@ -78,13 +93,14 @@ def handle_events():
             game_framework.change_state(title_state)
 
 def update():
-    global jump,jump_time
+    global jump
     boy.update()
 
 def draw():
     clear_canvas()
     background.draw()
     grass.draw()
+    barrier.draw()
     boy.draw()
     update_canvas()
     delay(0.05)
