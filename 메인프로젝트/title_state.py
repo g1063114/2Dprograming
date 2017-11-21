@@ -5,16 +5,21 @@ import project_main
 
 name="TitleState"
 image=None
+bgm=None
 
 
 def enter():
-    global image
+    global image,bgm
     open_canvas()
     image=load_image('시작화면7.png')
+    bgm=load_music('로비.wav')
+    bgm.set_volume(64)
+    bgm.repeat_play()
 
 def exit():
-    global image
+    global image,bgm
     del(image)
+    del(bgm)
     close_canvas()
 
 def handle_events():

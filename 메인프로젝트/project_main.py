@@ -5,6 +5,7 @@ import title_state
 
 speed=5.0
 back_speed=3.0
+bgm_main=None
 
 class Barrier:
     def __init__(self):
@@ -128,8 +129,11 @@ def collide(a,b):
     return True
 
 def enter():
-    global boy,grass,background,jump,running,barrier,jump_time,isjump,crash
+    global boy,grass,background,jump,running,barrier,jump_time,isjump,crash,bgm_main
     open_canvas()
+    bgm_main = load_music('스테이지1.wav')
+    bgm_main.set_volume(64)
+    bgm_main.repeat_play()
     boy=Boy()
     grass=Grass()
     background=Background()
@@ -139,6 +143,7 @@ def enter():
     crash=False
     jump_time=0
     isjump=0
+
 
 
 def exit():
