@@ -8,15 +8,36 @@ back_speed=3.0
 bgm_main=None
 
 class Barrier:
+    PIXEL_PER_KMETER = (10.0 / 0.5)  # 10 pixel 0.5km
+    RUN_SPEED_KMPH = 180000.0  # 180000km per hour
+    RUN_SPEED_KMPM = RUN_SPEED_KMPH / 60  # 3000km per min
+    RUN_SPEED_KMPS = RUN_SPEED_KMPM / 60  # 50km per sec
+    RUN_SPEED_PPS = RUN_SPEED_KMPS * PIXEL_PER_KMETER
+
     def __init__(self):
         self.x,self.y=400,80
         self.image = load_image('장애물.png')
+        #self.speed = 0
+        #self.width = 0
+        #self.screen_width = w
+        #self.screen_height = h
 
     def enter(self):
         self.sizeX,self.sizeY=80,440
         self.y=600-(self.sizeY/2)
 
-    def update(self):
+    #def draw(self):
+    #    x = int(self.width)
+    #    w = min(self.image.w - x, self.screen_width)
+    #    self.image.clip_draw_to_origin(x, 0, w, self.screen_height, 0, 0)
+    #    self.image.clip_draw_to_origin(0, 0, self.screen_width - w, self.screen_height, w, 0)
+        # clip_draw_to_origin(self, left, botton, width, height, x, y, w, h)
+
+    #def update(self, frame_time):
+    #    self.speed = Barrier.RUN_SPEED_PPS
+    #    self.width = (self.width + frame_time * self.speed) % self.image.w
+
+    def update(self,frame_time):
         self.x-=5
 
     def draw(self):
@@ -32,35 +53,62 @@ class Barrier:
         draw_rectangle(*self.get_bb())
 
 class Background:
-    def __init__(self):
+    PIXEL_PER_KMETER = (10.0 / 0.5)  # 10 pixel 0.5km
+    RUN_SPEED_KMPH = 180000.0  # 180000km per hour
+    RUN_SPEED_KMPM = RUN_SPEED_KMPH / 60  # 3000km per min
+    RUN_SPEED_KMPS = RUN_SPEED_KMPM / 60  # 50km per sec
+    RUN_SPEED_PPS = RUN_SPEED_KMPS * PIXEL_PER_KMETER
+
+    def __init__(self,w,h):
         self.image=load_image('b.png')
-        self.x,self.y=400,300
+        self.speed=0
+        self.width=0
+        self.screen_width=w
+        self.screen_height=h
+
+    def update(self, frame_time):
+        self.speed = Background.RUN_SPEED_PPS
+        self.width = (self.width + frame_time * self.speed) % self.image.w
 
     def draw(self):
-        self.image.draw(self.x,self.y)
-
-
-    def update(self):
-        if(self.x>250):
-            self.x-=back_speed
-        elif(self.x<=250):
-            self.x=400
+        x = int(self.width)
+        w = min(self.image.w - x, self.screen_width)
+        self.image.clip_draw_to_origin(x, 0, w, self.screen_height, 0, 0)
+        self.image.clip_draw_to_origin(0, 0, self.screen_width - w, self.screen_height, w, 0)
+        # clip_draw_to_origin(self, left, botton, width, height, x, y, w, h)
 
 class Grass:
-    def __init__(self):
+    PIXEL_PER_KMETER = (10.0 / 0.5)  # 10 pixel 0.5km
+    RUN_SPEED_KMPH = 180000.0  # 180000km per hour
+    RUN_SPEED_KMPM = RUN_SPEED_KMPH / 60  # 3000km per min
+    RUN_SPEED_KMPS = RUN_SPEED_KMPM / 60  # 50km per sec
+    RUN_SPEED_PPS = RUN_SPEED_KMPS * PIXEL_PER_KMETER
+
+    def __init__(self,w,h):
         self.image=load_image('grass.png')
-        self.x,self.y=400,30
+        self.speed = 0
+        self.width = 0
+        self.screen_width = w
+        self.screen_height = h
 
     def draw(self):
-        self.image.draw(self.x,self.y)
+        x = int(self.width)
+        w = min(self.image.w - x, self.screen_width)
+        self.image.clip_draw_to_origin(x, 0, w, self.screen_height, 0, 0)
+        self.image.clip_draw_to_origin(0, 0, self.screen_width - w, self.screen_height, w, 0)
+        # clip_draw_to_origin(self, left, botton, width, height, x, y, w, h)
 
-    def update(self):
-        if(self.x>250):
-            self.x-=speed
-        elif(self.x<=250):
-            self.x=400
+    def update(self, frame_time):
+        self.speed = Grass.RUN_SPEED_PPS
+        self.width = (self.width + frame_time * self.speed) % self.image.w
 
 class Boy:
+    PIXEL_PER_KMETER = (10.0 / 0.5)  # 10 pixel 0.5km
+    RUN_SPEED_KMPH = 180000.0  # 180000km per hour
+    RUN_SPEED_KMPM = RUN_SPEED_KMPH / 60  # 3000km per min
+    RUN_SPEED_KMPS = RUN_SPEED_KMPM / 60  # 50km per sec
+    RUN_SPEED_PPS = RUN_SPEED_KMPS * PIXEL_PER_KMETER
+
     def __init__(self):
         self.x,self.y=50,130
         self.frame=0
@@ -130,13 +178,13 @@ def collide(a,b):
 
 def enter():
     global boy,grass,background,jump,running,barrier,jump_time,isjump,crash,bgm_main
-    open_canvas()
-    bgm_main = load_music('스테이지1.wav')
-    bgm_main.set_volume(64)
-    bgm_main.repeat_play()
+    #open_canvas()
+    #bgm_main = load_music('스테이지1.wav')
+    #bgm_main.set_volume(64)
+    #bgm_main.repeat_play()
     boy=Boy()
-    grass=Grass()
-    background=Background()
+    grass=Grass(800,60)
+    background=Background(800,600)
     barrier=Barrier()
     running = True
     jump = False
@@ -158,31 +206,31 @@ def handle_events():
     global jump
     events=get_events()
     for event in events:
-        if event.type==SDL_QUIT:
+        if event.type==SDL_KEYDOWN and event.key==SDLK_ESCAPE:
             game_framework.quit()
+        #if event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
+        #    game_framework.change_state(title_state)
         elif (event.type,event.key)==(SDL_KEYDOWN,SDLK_SPACE):
             jump=False
         elif (event.type,event.key)==(SDL_KEYUP,SDLK_SPACE):
             jump=True
-        elif event.type==SDL_KEYDOWN and event.key==SDLK_ESCAPE:
-            game_framework.change_state(title_state)
 
-def update():
+def update(frame_time):
     global jump,background,grass,barrier,crash
     boy.update()
-    background.update()
-    grass.update()
-    barrier.update()
+    background.update(frame_time)
+    grass.update(frame_time)
+    barrier.update(frame_time)
     if collide(boy,barrier):
         print('collision')
 
 
-def draw():
+def draw(frame_time):
     clear_canvas()
     background.draw()
     grass.draw()
     barrier.draw()
-    update()
+    #update()
     boy.draw()
     boy.draw_bb()
     barrier.draw_bb()
