@@ -12,7 +12,7 @@ def enter():
     #open_canvas()
     image=load_image('시작화면7.png')
     bgm=load_music('로비.wav')
-    bgm.set_volume(64)
+    bgm.set_volume(32)
     bgm.repeat_play()
     pass
 

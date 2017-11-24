@@ -7,11 +7,11 @@ from barrier import *
 from collide import *
 
 name="MainState"
-
+main_bgm=None
 
 
 def create_world():
-    global cookie,background,grass,obstacle,jump,jump_time,isjump
+    global cookie,background,grass,obstacle,jump,jump_time,isjump,main_bgm
     background=Background(800,600)
     cookie=Cookie()
     grass=Grass(800,60)
@@ -19,6 +19,9 @@ def create_world():
     jump = False
     jump_time = 0
     isjump = 0
+    main_bgm=load_music('스테이지1.wav')
+    main_bgm.set_volume(32)
+    main_bgm.repeat_play()
 
 def destroy_world():
     global cookie, background, grass, obstacle
