@@ -7,18 +7,37 @@ class Barrier:
     RUN_SPEED_KMPS = RUN_SPEED_KMPM / 60  # 50km per sec
     RUN_SPEED_PPS = RUN_SPEED_KMPS * PIXEL_PER_KMETER
 
-    def __init__(self):
-        self.x,self.y=400,80
+    def __init__(self,px,ptype,pimage_type):
+        self.x,self.y=px,80
         self.dir=0
-        self.image = load_image('장애물.png')
+        self.type=ptype
+        self.imagetype=pimage_type
+        #self.image = load_image('장애물.png')
         #self.speed = 0
         #self.width = 0
         #self.screen_width = w
         #self.screen_height = h
 
     def enter(self):
-        self.sizeX,self.sizeY=80,440
-        self.y=600-(self.sizeY/2)
+        if self.type==0:
+            if self.imagetype==0:
+                self.sizeX,self.sizeY=80,440
+                self.image=load_image('포크.png')
+            elif self.imagetype==1:
+                self.sizeX,self.sizeY=120,440
+                self.image=load_image('포크2.png')
+
+            self.y=600-(self.sizeY/2)
+
+        elif self.type==1:
+            if self.imagetype==0:
+                self.sizeX,self.sizeY=30,60
+                self.image=load_image('장애물.png')
+            elif self.imagetype==1:
+                self.sizeX,self.sizeY=42,100
+                self.image=load_image('장애물2.png')
+
+            self.y=45+(self.sizeY/2)
 
     #def draw(self):
     #    x = int(self.width)
@@ -37,13 +56,19 @@ class Barrier:
         self.dir=1
 
     def draw(self):
-        self.image.draw(self.x,self.y)
+        if self.type==0:
+            self.image.draw(self.x,self.y)
+        elif self.type==1:
+            self.image.draw(self.x,self.y)
 
     def exit(self):
         del(self.image)
 
     def get_bb(self):
-        return self.x-8,self.y-20,self.x+8,self.y+20
+        if self.type==1:
+            return self.x-8,self.y-20,self.x+8,self.y+20
+        elif self.type==0:
+            return self.x-20,self.y-200,self.x+20,self.y+200
 
     def draw_bb(self):
         draw_rectangle(*self.get_bb())
