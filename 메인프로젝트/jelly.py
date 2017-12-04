@@ -13,10 +13,6 @@ class Jelly:
         self.type=jtype
         self.dir=0
 
-
-    def __del__(self):
-        self.exit()
-
     def enter(self):
         if self.type==0:
             self.skill=0
@@ -25,7 +21,7 @@ class Jelly:
             self.skill=1
             self.image=load_image('젤리아이콘.png')
         elif self.type==2:
-            self.skill=2
+            self.skill=80
             self.image=load_image('회복.png')
 
     def update(self,frame_time):

@@ -14,6 +14,9 @@ class Background:
         self.screen_width=w
         self.screen_height=h
 
+    def exit(self):
+        del(self.image)
+
     def update(self, frame_time):
         self.speed = Background.RUN_SPEED_PPS
         self.width = (self.width + frame_time * self.speed) % self.image.w

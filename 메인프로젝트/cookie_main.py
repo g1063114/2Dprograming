@@ -33,11 +33,12 @@ def create_world():
     load_map_data()
 
 def destroy_world():
-    global cookie, background, grass, obstacle,obstacle_list,ui
+    global cookie, background, grass, obstacle,obstacle_list,ui,main_bgm
     del(cookie)
     del(background)
     del(grass)
     del(ui)
+    del(main_bgm)
     #del(obstacle)
     for i in obstacle_list:
         for j in obstacle_list[i]:
@@ -85,8 +86,9 @@ def update(frame_time):
         for j in obstacle_list[i]:
             if i==0:
                 if(collide(cookie,j)):
-                    cookie.check_collision()
-                    cookie.life-=10.0
+                    if cookie.big is False:
+                        cookie.check_collision()
+                        cookie.life-=10.0
                     obstacle_list[i].remove(j)
             elif i==1:
                 if(collide(cookie,j)):
@@ -98,8 +100,8 @@ def update(frame_time):
                         obstacle_list[i].remove(j)
                     elif j.type==2:
                         cookie.life+=j.skill
-                        if cookie.life>300:
-                            cookie.life=300
+                        if cookie.life>500:
+                            cookie.life=500
 
 
 
@@ -119,6 +121,7 @@ def draw(frame_time):
 
     ui.draw()
     cookie.draw()
+    cookie.draw_bb()
     cookie.collision = False
     update_canvas()
 
@@ -132,15 +135,13 @@ def load_map_data():
     #clear_map_data()
     global obstacle_list
     tempobstacle=Barrier(1000,1,0)
-
     tempobstacle.enter()
-
     obstacle_list={OBSTACLE:[tempobstacle],JELLY:[]}
 
     tempobstacle=Barrier(1300,1,0)
     tempobstacle.enter()
     obstacle_list[OBSTACLE].append(tempobstacle)
-    tempobstacle = Barrier(1600, 1, 1)
+    tempobstacle = Barrier(1600, 1, 0)
     tempobstacle.enter()
     obstacle_list[OBSTACLE].append(tempobstacle)
     tempobstacle = Barrier(1900, 0, 0)
@@ -150,10 +151,13 @@ def load_map_data():
     tempobstacle = Barrier(2200, 0, 1)
     tempobstacle.enter()
     obstacle_list[OBSTACLE].append(tempobstacle)
-    tempobstacle = Barrier(2400, 1, 1)
+    tempobstacle = Barrier(2400, 1, 0)
     tempobstacle.enter()
     obstacle_list[OBSTACLE].append(tempobstacle)
     tempobstacle = Barrier(2700, 0, 1)
+    tempobstacle.enter()
+    obstacle_list[OBSTACLE].append(tempobstacle)
+    tempobstacle = Barrier(2800, 1, 0)
     tempobstacle.enter()
     obstacle_list[OBSTACLE].append(tempobstacle)
 
@@ -192,6 +196,96 @@ def load_map_data():
     obstacle_list[JELLY].append(tempjelly)
 
     obstacle_list[JELLY].append(tempjelly)
-    tempjelly = Jelly(1350, 130, 1)
+    tempjelly = Jelly(1350, 100, 1)
+    tempjelly.enter()
+    obstacle_list[JELLY].append(tempjelly)
+
+    obstacle_list[JELLY].append(tempjelly)
+    tempjelly = Jelly(1400, 100, 1)
+    tempjelly.enter()
+    obstacle_list[JELLY].append(tempjelly)
+
+    obstacle_list[JELLY].append(tempjelly)
+    tempjelly = Jelly(1450, 100, 1)
+    tempjelly.enter()
+    obstacle_list[JELLY].append(tempjelly)
+
+    obstacle_list[JELLY].append(tempjelly)
+    tempjelly = Jelly(1500, 100, 1)
+    tempjelly.enter()
+    obstacle_list[JELLY].append(tempjelly)
+
+    obstacle_list[JELLY].append(tempjelly)
+    tempjelly = Jelly(1550, 100, 1)
+    tempjelly.enter()
+    obstacle_list[JELLY].append(tempjelly)
+
+    obstacle_list[JELLY].append(tempjelly)
+    tempjelly = Jelly(1600, 130, 1)
+    tempjelly.enter()
+    obstacle_list[JELLY].append(tempjelly)
+
+    obstacle_list[JELLY].append(tempjelly)
+    tempjelly = Jelly(1650, 100, 1)
+    tempjelly.enter()
+    obstacle_list[JELLY].append(tempjelly)
+
+    obstacle_list[JELLY].append(tempjelly)
+    tempjelly = Jelly(1700, 100, 1)
+    tempjelly.enter()
+    obstacle_list[JELLY].append(tempjelly)
+
+    obstacle_list[JELLY].append(tempjelly)
+    tempjelly = Jelly(1750, 100, 1)
+    tempjelly.enter()
+    obstacle_list[JELLY].append(tempjelly)
+
+    obstacle_list[JELLY].append(tempjelly)
+    tempjelly = Jelly(1800, 100, 1)
+    tempjelly.enter()
+    obstacle_list[JELLY].append(tempjelly)
+
+    obstacle_list[JELLY].append(tempjelly)
+    tempjelly = Jelly(1850, 100, 1)
+    tempjelly.enter()
+    obstacle_list[JELLY].append(tempjelly)
+
+    obstacle_list[JELLY].append(tempjelly)
+    tempjelly = Jelly(1900, 70, 1)
+    tempjelly.enter()
+    obstacle_list[JELLY].append(tempjelly)
+
+    obstacle_list[JELLY].append(tempjelly)
+    tempjelly = Jelly(1950, 70, 1)
+    tempjelly.enter()
+    obstacle_list[JELLY].append(tempjelly)
+
+    obstacle_list[JELLY].append(tempjelly)
+    tempjelly = Jelly(2000, 70, 1)
+    tempjelly.enter()
+    obstacle_list[JELLY].append(tempjelly)
+
+    obstacle_list[JELLY].append(tempjelly)
+    tempjelly = Jelly(2050, 70, 1)
+    tempjelly.enter()
+    obstacle_list[JELLY].append(tempjelly)
+
+    obstacle_list[JELLY].append(tempjelly)
+    tempjelly = Jelly(2100, 100, 0)
+    tempjelly.enter()
+    obstacle_list[JELLY].append(tempjelly)
+
+    obstacle_list[JELLY].append(tempjelly)
+    tempjelly = Jelly(2150, 70, 1)
+    tempjelly.enter()
+    obstacle_list[JELLY].append(tempjelly)
+
+    obstacle_list[JELLY].append(tempjelly)
+    tempjelly = Jelly(2200, 70, 1)
+    tempjelly.enter()
+    obstacle_list[JELLY].append(tempjelly)
+
+    obstacle_list[JELLY].append(tempjelly)
+    tempjelly = Jelly(2250, 70, 1)
     tempjelly.enter()
     obstacle_list[JELLY].append(tempjelly)

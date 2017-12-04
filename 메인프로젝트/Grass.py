@@ -14,6 +14,9 @@ class Grass:
         self.screen_width = w
         self.screen_height = h
 
+    def exit(self):
+        del(self.image)
+
     def draw(self):
         x = int(self.width)
         w = min(self.image.w - x, self.screen_width)

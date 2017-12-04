@@ -17,14 +17,16 @@ class Barrier:
         #self.width = 0
         #self.screen_width = w
         #self.screen_height = h
+    def exit(self):
+        del(self.image)
 
     def enter(self):
         if self.type==0:
             if self.imagetype==0:
-                self.sizeX,self.sizeY=80,440
+                self.sizeX,self.sizeY=80,520
                 self.image=load_image('포크.png')
             elif self.imagetype==1:
-                self.sizeX,self.sizeY=120,440
+                self.sizeX,self.sizeY=120,520
                 self.image=load_image('포크2.png')
 
             self.y=600-(self.sizeY/2)

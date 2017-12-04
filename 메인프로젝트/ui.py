@@ -16,5 +16,5 @@ class UI:
 
     def draw(self):
         if cookie_main.cookie.life>0:
-            rate=(int)(300*(cookie_main.cookie.life/300))
+            rate=(int)(300*(cookie_main.cookie.life/500))
             self.hp_image.clip_draw(0,0,rate*2,64,rate+50,550)
