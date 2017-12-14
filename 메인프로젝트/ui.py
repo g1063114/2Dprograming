@@ -52,6 +52,10 @@ class UI:
             self.playerscore=(int)(cookie_main.cookie.jellyCount)
 
             self.jelly_image.draw(80,480)
+            self.score_draw((int)(self.playerscore/1000),130,480)
+            self.score_draw((int)(self.playerscore%1000/100),180,480)
+            self.score_draw((int)(self.playerscore%100/10),230,480)
+            self.score_draw((int)(self.playerscore%10),280,480)
 
     def score_draw(self,number,x,y):
         if number==0:

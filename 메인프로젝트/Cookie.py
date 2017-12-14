@@ -75,6 +75,7 @@ class Player:
             self.bigCount+=0.5
             if self.bigCount>100:
                 self.big=False
+                self.bigCount=0
 
     def check_collision(self):
         self.collision=True

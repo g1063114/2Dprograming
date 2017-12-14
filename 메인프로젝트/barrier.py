@@ -23,10 +23,10 @@ class Barrier:
     def enter(self):
         if self.type==0:
             if self.imagetype==0:
-                self.sizeX,self.sizeY=80,520
+                self.sizeX,self.sizeY=80,540
                 self.image=load_image('포크.png')
             elif self.imagetype==1:
-                self.sizeX,self.sizeY=120,520
+                self.sizeX,self.sizeY=80,540
                 self.image=load_image('포크2.png')
 
             self.y=600-(self.sizeY/2)
@@ -38,6 +38,9 @@ class Barrier:
             elif self.imagetype==1:
                 self.sizeX,self.sizeY=42,100
                 self.image=load_image('장애물2.png')
+            elif self.imagetype==2:
+                self.sizeX,self.sizeY=30,60
+                self.image=load_image('장애물3.png')
 
             self.y=45+(self.sizeY/2)
 

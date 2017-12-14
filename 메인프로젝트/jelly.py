@@ -23,6 +23,9 @@ class Jelly:
         elif self.type==2:
             self.skill=80
             self.image=load_image('회복.png')
+        elif self.type==3:
+            self.skill=10
+            self.image=load_image('스페셜젤리.png')
 
     def update(self,frame_time):
         distance = Jelly.RUN_SPEED_PPS * frame_time
