@@ -78,3 +78,6 @@ class UI:
             self.number8_image.draw(x,y)
         elif number==9:
             self.number9_image.draw(x,y)
+
+    def replayerscore(self):
+        return self.playerscore

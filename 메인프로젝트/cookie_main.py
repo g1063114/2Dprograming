@@ -9,6 +9,7 @@ from ui import *
 from jelly import *
 import json
 import title_state
+import result_state
 
 name="MainState"
 main_bgm=None
@@ -73,7 +74,7 @@ def update(frame_time):
     global jump, jump_time, isjump,obstacle_list,gameEnd
 
     if cookie.dead==True:
-        game_framework.change_state(title_state)
+        game_framework.change_state(result_state)
         return
 
     background.update(frame_time)

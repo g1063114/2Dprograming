@@ -1,26 +1,29 @@
 from pico2d import *
 import game_framework
+import title_state
 import cookie_main
+import ui
 
-name="TitleState"
+name="ResultState"
 image=None
 bgm=None
+jelly_image=None
 
 def enter():
-    global image,bgm
-    #open_canvas()
-    image=load_image('시작화면7.png')
-    bgm=load_music('로비.wav')
-    bgm.set_volume(32)
+    global image,bgm,result
+    image = load_image('결과화면.png')
+    bgm = load_music('결과음악.wav')
+    bgm.set_volume(64)
     bgm.repeat_play()
+    result=0
     pass
 
 def exit():
-    global image,bgm
+    global image,bgm,jelly_image
     del(image)
     del(bgm)
+    del(jelly_image)
     pass
-    #close_canvas()
 
 def handle_events():
     events=get_events()
@@ -31,12 +34,15 @@ def handle_events():
             if(event.type,event.key)==(SDL_KEYDOWN,SDLK_ESCAPE):
                 game_framework.quit()
             elif (event.type,event.key)==(SDL_KEYDOWN,SDLK_SPACE):
-                game_framework.change_state(cookie_main)
+                game_framework.change_state(title_state)
     pass
 
 def draw(frame_time):
+    global result,jelly_image
     clear_canvas()
     image.draw(400,300)
+    jelly_image = ui.load_image('젤리아이콘.png')
+    jelly_image.draw(400, 300)
     update_canvas()
     pass
 
