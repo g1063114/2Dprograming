@@ -8,7 +8,7 @@ class Background:
     RUN_SPEED_PPS = RUN_SPEED_KMPS * PIXEL_PER_KMETER
 
     def __init__(self,w,h):
-        self.image=load_image('b.png')
+        self.image=load_image('bg.png')
         self.speed=0
         self.width=0
         self.screen_width=w
